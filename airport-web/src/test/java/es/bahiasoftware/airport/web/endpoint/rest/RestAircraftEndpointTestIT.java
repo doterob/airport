@@ -37,7 +37,7 @@ import org.junit.runners.MethodSorters;
 @SpringBootTest(classes = AppConfig.class)
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 // @Transactional
-public class RestAircraftEndpointTest extends AbstractTransactionalJUnit4SpringContextTests {
+public class RestAircraftEndpointTestIT extends AbstractTransactionalJUnit4SpringContextTests {
 
 	private static final ObjectMapper MAPPER = new ObjectMapper();
 	private static final MediaType APPLICATION_JSON_UTF8 = new MediaType(MediaType.APPLICATION_JSON.getType(),
