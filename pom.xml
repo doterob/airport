@@ -21,6 +21,7 @@
 
 	<properties>
 		<java.version>1.7</java.version>
+		<sonar.host.url>http://192.168.1.39:9000</sonar.host.url>
 	</properties>
 
 	<dependencyManagement>
@@ -142,8 +143,8 @@
 						<exclude>**/*model/**/*.java</exclude>
 						<exclude>**/*persistence/**/*.java</exclude>
 					</excludes>
-					<destFile>${basedir}/target/coverage-reports/jacoco-unit.exec</destFile>
-					<dataFile>${basedir}/target/coverage-reports/jacoco-unit.exec</dataFile>
+<!-- 					<destFile>${basedir}/target/coverage-reports/jacoco-unit.exec</destFile> -->
+<!-- 					<dataFile>${basedir}/target/coverage-reports/jacoco-unit.exec</dataFile> -->
 				</configuration>
 				<executions>
 					<execution>
