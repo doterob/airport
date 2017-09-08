@@ -13,7 +13,7 @@ node('java8') {
     }
     
     stage('Build') {
-        sh 'mvn clean package install -Dmaven.test.failure.ignore=true' -Ptest
+        sh 'mvn clean package install -Ptest -Dmaven.test.failure.ignore=true'
     }
     
     stage('Junit'){
