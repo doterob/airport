@@ -6,7 +6,7 @@
 	<parent>
 		<groupId>es.bahiasoftware.airport</groupId>
 		<artifactId>airport-project</artifactId>
-		<version>0.0.1</version>
+		<version>0.0.2-SNAPSHOT</version>
 	</parent>
 	<artifactId>airport-web</artifactId>
 	<name>airport-web</name>
@@ -14,7 +14,7 @@
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<deploy.skip>false</deploy.skip>
+		<maven.deploy.skip>false</maven.deploy.skip>
 	</properties>
 
 	<dependencies>
