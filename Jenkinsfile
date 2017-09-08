@@ -21,19 +21,19 @@ node('java8') {
     }
     
     stage('Integración'){
-        sh 'mvn integration-test -Pintegration-test'
+        sh 'mvn integration-test -Pintegration-test -Dclean.skip=true'
         junit '**/target/failsafe-reports/*.xml'
     }
     
     stage('Sonar') {
         withSonarQubeEnv('sonar.bahia.net') {
-			sh 'mvn sonar:sonar -Psonar -Dsonar.host.url=$SONAR_HOST -Dsonar.jdbc.url=$SONAR_BBDD'
+			sh 'mvn sonar:sonar -Psonar -Dclean.skip=true -Dsonar.host.url=$SONAR_HOST -Dsonar.jdbc.url=$SONAR_BBDD'
 		}
     }
     
     stage('Nexus') {		
         archiveArtifacts '**/airport-web-*.jar'
-        sh 'mvn deploy -Pdeploy'
+        sh 'mvn deploy -Pdeploy -Dclean.skip=true'
 	}
 	
 	stage('Docker') {
