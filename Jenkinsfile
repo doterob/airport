@@ -33,8 +33,8 @@ node('java8') {
     
     stage('Nexus') {		
         archiveArtifacts '**/airport-web-*.jar'
-        nexusArtifactUploader artifacts: [[artifactId: 'airport-web', classifier: '', file: 'airport-web/target/airport-web-0.0.1-SNAPSHOT.jar', type: 'jar']], credentialsId: 'nexus.bahia.net', groupId: 'es.bahiasoftware.airport', nexusUrl: '192.168.1.39:8081', nexusVersion: 'nexus3', protocol: 'http', repository: 'bahia-snapshot', version: '0.0.1-SNAPSHOT'
-    }
+        sh 'mvn deploy'
+	}
 	
 	stage('Docker') {
         sh 'echo docker push airport'
