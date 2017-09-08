@@ -1,13 +1,14 @@
 node('java8') {
    
     stage('Clonar') {
-        		checkout scm: [$class: 'MercurialSCM',
-        	    	source: '$SCM_URL/hg/airport',
-        	    	browser:[$class: 'HgWeb', url: "$SCM_URL/hg/airport"],
-        			revision: 'default',
-        			clean: true,
-        			credentialsId: 'bahia.net-jenkins'],
-        		poll: false
+        		//checkout scm: [$class: 'MercurialSCM',
+        	    //	source: '$SCM_URL/hg/airport',
+        	    //	browser:[$class: 'HgWeb', url: "$SCM_URL/hg/airport"],
+        		//	revision: 'default',
+        		//	clean: true,
+        		//	credentialsId: 'bahia.net-jenkins'],
+        		//poll: false
+                git credentialsId: 'github-doterob', url: 'https://github.com/doterob/airport'
             
     }
     
