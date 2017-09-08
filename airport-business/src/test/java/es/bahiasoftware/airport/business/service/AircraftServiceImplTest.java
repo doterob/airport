@@ -16,7 +16,7 @@ import org.mockito.runners.MockitoJUnitRunner;
 
 import es.bahiasoftware.airport.business.exception.AppException;
 import es.bahiasoftware.airport.model.Aircraft;
-import es.bahiasoftware.airport.persistence.AircraftRepository;
+import es.bahiasoftware.airport.persistence.AircraftDao;
 
 @RunWith(MockitoJUnitRunner.class)
 public class AircraftServiceImplTest {
@@ -25,7 +25,7 @@ public class AircraftServiceImplTest {
 	private AircraftServiceImpl service;
 
 	@Mock
-	private AircraftRepository repository;
+	private AircraftDao repository;
 	
 	private final String idExists = "388";
 	private final String idNotExists = "XXXX";

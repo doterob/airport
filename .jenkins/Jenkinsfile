@@ -1,7 +1,14 @@
 node('java8') {
    
-    stage('Clone') {
-        git credentialsId: 'github-doterob', url: 'https://github.com/doterob/airport'
+    stage('Clonar') {
+        		checkout scm: [$class: 'MercurialSCM',
+        	    	source: '$SCM_URL/hg/airport',
+        	    	browser:[$class: 'HgWeb', url: "$SCM_URL/hg/airport"],
+        			revision: 'default',
+        			clean: true,
+        			credentialsId: 'bahia.net-jenkins'],
+        		poll: false
+            
     }
     
     stage('Build') {
@@ -12,16 +19,22 @@ node('java8') {
         junit '**/target/surefire-reports/*.xml'
     }
     
-    stage('Integration'){
-        sh 'mvn clean integration-test -P integration-test'
+    stage('Integración'){
+        sh 'mvn integration-test -P integration-test'
         junit '**/target/failsafe-reports/*.xml'
     }
     
     stage('Sonar') {
-        sh 'mvn sonar:sonar -Dsonar.host.url=http://192.168.1.39:9000'
+        withSonarQubeEnv('sonar.bahia.net') {
+			sh 'mvn sonar:sonar -Dsonar.host.url=$SONAR_HOST -Dsonar.jdbc.url=$SONAR_BBDD'
+		}
     }
     
-    stage('Result') {
-        archive includes: '**target/*.war'
+    stage('Nexus') {		
+        archiveArtifacts '**/airport-web-*.jar'
+    }
+	
+	stage('Docker') {
+        sh 'echo docker push airport'
     }
 }

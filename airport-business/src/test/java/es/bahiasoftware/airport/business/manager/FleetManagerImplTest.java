@@ -49,5 +49,4 @@ public class FleetManagerImplTest {
 	public void retire_already_retired() throws AppException {
 		manager.retire(idRetired);
 	}
-
 }

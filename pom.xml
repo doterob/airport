@@ -21,7 +21,11 @@
 
 	<properties>
 		<java.version>1.7</java.version>
-		<sonar.host.url>http://192.168.1.39:9000</sonar.host.url>
+
+		<sonar.projectName>airport</sonar.projectName>
+		<sonar.language>java</sonar.language>
+		<sonar.java.coveragePlugin>jacoco</sonar.java.coveragePlugin>
+		<sonar.jacoco.excludes>*model*,*persistence*</sonar.jacoco.excludes>
 	</properties>
 
 	<dependencyManagement>
@@ -139,26 +143,34 @@
 				<artifactId>jacoco-maven-plugin</artifactId>
 				<version>0.7.9</version>
 				<configuration>
-					<excludes>
-						<exclude>**/*model/**/*.java</exclude>
-						<exclude>**/*persistence/**/*.java</exclude>
-					</excludes>
-<!-- 					<destFile>${basedir}/target/coverage-reports/jacoco-unit.exec</destFile> -->
-<!-- 					<dataFile>${basedir}/target/coverage-reports/jacoco-unit.exec</dataFile> -->
+					<includes>
+						<include>es/bahiasoftware/airport/**</include>
+					</includes>
+					<!-- <excludes> -->
+					<!-- <exclude>**/*model/**/*.java</exclude> -->
+					<!-- <exclude>**/*persistence/**/*.java</exclude> -->
+					<!-- </excludes> -->
 				</configuration>
 				<executions>
 					<execution>
-						<id>jacoco-initialize</id>
+						<id>jacoco-unit</id>
+						<phase>package</phase>
 						<goals>
 							<goal>prepare-agent</goal>
 						</goals>
+						<configuration>
+							<destFile>target/jacoco.exec</destFile>
+						</configuration>
 					</execution>
 					<execution>
-						<id>jacoco-site</id>
-						<phase>verify</phase>
+						<id>jacoco-it</id>
+						<phase>pre-integration-test</phase>
 						<goals>
-							<goal>report</goal>
+							<goal>prepare-agent</goal>
 						</goals>
+						<configuration>
+							<destFile>target/jacoco-it.exec</destFile>
+						</configuration>
 					</execution>
 				</executions>
 			</plugin>

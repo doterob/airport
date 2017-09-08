@@ -9,13 +9,13 @@ import org.springframework.transaction.annotation.Transactional;
 import es.bahiasoftware.airport.business.exception.AppException;
 import es.bahiasoftware.airport.business.exception.ErrorType;
 import es.bahiasoftware.airport.model.Aircraft;
-import es.bahiasoftware.airport.persistence.AircraftRepository;
+import es.bahiasoftware.airport.persistence.AircraftDao;
 
 @Service
 public class AircraftServiceImpl implements AircraftService {
 	
 	@Autowired
-	private AircraftRepository repository;
+	private AircraftDao repository;
 	
 	@Transactional(rollbackFor=AppException.class)
 	@Override
