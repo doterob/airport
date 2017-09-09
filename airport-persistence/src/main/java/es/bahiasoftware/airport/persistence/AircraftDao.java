@@ -4,4 +4,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import es.bahiasoftware.airport.model.Aircraft;
 
 public interface AircraftDao extends JpaRepository<Aircraft, String> {
+	
+	Aircraft findByManufacturerAndModelAllIgnoreCase(String manufacturer, String model);
 }

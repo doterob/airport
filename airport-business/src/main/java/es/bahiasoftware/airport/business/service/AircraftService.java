@@ -12,4 +12,6 @@ public interface AircraftService {
 	Aircraft get(String id) throws AppException;
 	
 	List<Aircraft> find() throws AppException;
+	
+	Aircraft discover(String manufacturer, String model) throws AppException;
 }

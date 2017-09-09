@@ -17,34 +17,47 @@ import org.mockito.runners.MockitoJUnitRunner;
 import es.bahiasoftware.airport.business.exception.AppException;
 import es.bahiasoftware.airport.model.Aircraft;
 import es.bahiasoftware.airport.persistence.AircraftDao;
+import junit.framework.Assert;
 
 @RunWith(MockitoJUnitRunner.class)
 public class AircraftServiceImplTest {
 
 	@InjectMocks
 	private AircraftServiceImpl service;
-
 	@Mock
 	private AircraftDao repository;
+	@Mock
+	private AircraftImporter importer;
 	
-	private final String idExists = "388";
-	private final String idNotExists = "XXXX";
-	private final Aircraft expected = aircraft(idExists);
+	private final String idExists = "ML-388-A";
+	private final String idNotExists = "X-XXXX-X";
+	private final String idImported = "IM-001-Z";
+	private final String manufacturerExists = "Airbus";
+	private final String modelExists = "A320";
+	private final String manufacturerImported = "Boeing";
+	private final String modelImported = "777";
+	private final Aircraft expected = aircraft(idExists, manufacturerExists, modelExists);
+	private final Aircraft imported = aircraft(idImported, manufacturerImported, modelImported);
 
 	@Before
 	public void setUp() throws AppException {
 		when(repository.findOne(idExists)).thenReturn(expected);
+		when(repository.findByManufacturerAndModelAllIgnoreCase(manufacturerExists, modelExists)).thenReturn(expected);
+		when(repository.save(expected)).thenReturn(expected);
+		when(repository.save(imported)).thenReturn(imported);
+		when(importer.find(manufacturerImported, modelImported)).thenReturn(imported);
 	}
 
 	@Test
 	public void get_exist() throws AppException {
-		final Aircraft aircraft = service.get(idExists);
-		assertEquals(expected, aircraft);
+		final Aircraft actual = service.get(idExists);
+		assertEquals(expected, actual);
 	}
 
-	@Test(expected = AppException.class)
+	@Test
 	public void get_not_exist() throws AppException {
-		service.get(idNotExists);
+		final Aircraft actual = service.get(idNotExists);
+		assertNull(actual);
 	}
 
 	@Test
@@ -55,9 +68,9 @@ public class AircraftServiceImplTest {
 
 	@Test
 	public void findAll_empty_list() throws AppException {
-		final List<Aircraft> current = service.find();
+		final List<Aircraft> actual = service.find();
 		verify(repository, times(1)).findAll();
-		assertEquals(current.size(), 0);
+		assertEquals(actual.size(), 0);
 	}
 
 	@Test
@@ -67,8 +80,27 @@ public class AircraftServiceImplTest {
 				aircraft(idNotExists));
 
 		when(repository.findAll()).thenReturn(expected);
-		final List<Aircraft> current = service.find();
+		final List<Aircraft> actual = service.find();
 		verify(repository, times(1)).findAll();
-		assertEquals(expected, current);
+		assertEquals(expected, actual);
+	}
+	
+	@Test
+	public void discover_exists() throws AppException {
+		final Aircraft actual = service.discover(manufacturerExists, modelExists);
+		assertEquals(expected, actual);
+	}
+	
+	@Test
+	public void discover_import() throws AppException {
+		final Aircraft actual = service.discover(manufacturerImported, modelImported);
+		assertEquals(imported, actual);
+		verify(repository, times(1)).save(imported);
+	}
+	
+	@Test
+	public void discover_not_exists() throws AppException {
+		final Aircraft actual = service.discover(manufacturerExists, modelImported);
+		assertNull(actual);
 	}
 }

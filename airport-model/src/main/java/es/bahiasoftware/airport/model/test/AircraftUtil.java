@@ -24,4 +24,11 @@ public class AircraftUtil {
 		result.setStatus(status);
 		return result;
 	}
+	
+	public static Aircraft aircraft(String id, String manufacturer, String model) {
+		final Aircraft result = aircraft(id);
+		result.setManufacturer(manufacturer);
+		result.setModel(model);
+		return result;
+	}
 }

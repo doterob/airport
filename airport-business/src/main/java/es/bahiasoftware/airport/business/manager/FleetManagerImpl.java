@@ -18,16 +18,20 @@ public class FleetManagerImpl implements FleetManager {
 	@Override
 	public Aircraft retire(String id) throws AppException {
 
-		final Aircraft aircraft = aircraftService.get(id);
+		final Aircraft result = aircraftService.get(id);
 		
-		if(AircraftStatus.RETIRED.equals(aircraft.getStatus())) {
+		if(result == null) {
+			throw new AppException(ErrorType.AIRCRAFT_NOT_EXISTS);
+		}
+		
+		if(AircraftStatus.RETIRED.equals(result.getStatus())) {
 			throw new AppException(ErrorType.AIRCRAFT_RETIRED);
 		}
 		
-		aircraft.setStatus(AircraftStatus.RETIRED);
-		aircraftService.upsert(aircraft);
+		result.setStatus(AircraftStatus.RETIRED);
+		aircraftService.upsert(result);
 		
-		return aircraft;
+		return result;
 		
 	}
 }
