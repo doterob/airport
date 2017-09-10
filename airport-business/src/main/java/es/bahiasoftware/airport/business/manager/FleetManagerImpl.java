@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 
 import es.bahiasoftware.airport.business.exception.AppException;
 import es.bahiasoftware.airport.business.exception.ErrorType;
-import es.bahiasoftware.airport.business.service.AircraftService;
+import es.bahiasoftware.airport.business.service.aircraft.AircraftService;
 import es.bahiasoftware.airport.model.Aircraft;
 import es.bahiasoftware.airport.model.AircraftStatus;
 

@@ -1,0 +1,1 @@
+insert into Airport(id,latitude,longitude,city,country) values ('SCQ',42,8,'Santiago de Compostela','España'),('BCN',41,2,'Barcelona','España'),('MAD',40,3,'Madrid','España')

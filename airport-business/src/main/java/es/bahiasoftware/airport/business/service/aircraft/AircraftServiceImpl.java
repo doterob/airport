@@ -1,4 +1,4 @@
-package es.bahiasoftware.airport.business.service;
+package es.bahiasoftware.airport.business.service.aircraft;
 
 import java.util.List;
 
@@ -34,7 +34,7 @@ public class AircraftServiceImpl implements AircraftService {
 	}
 
 	@Override
-	public List<Aircraft> find() throws AppException {
+	public List<Aircraft> findAll() throws AppException {
 		return repository.findAll();
 	}
 	

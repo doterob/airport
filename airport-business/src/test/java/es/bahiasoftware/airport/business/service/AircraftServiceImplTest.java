@@ -15,6 +15,8 @@ import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import es.bahiasoftware.airport.business.exception.AppException;
+import es.bahiasoftware.airport.business.service.aircraft.AircraftImporter;
+import es.bahiasoftware.airport.business.service.aircraft.AircraftServiceImpl;
 import es.bahiasoftware.airport.model.Aircraft;
 import es.bahiasoftware.airport.persistence.AircraftDao;
 import junit.framework.Assert;
@@ -68,7 +70,7 @@ public class AircraftServiceImplTest {
 
 	@Test
 	public void findAll_empty_list() throws AppException {
-		final List<Aircraft> actual = service.find();
+		final List<Aircraft> actual = service.findAll();
 		verify(repository, times(1)).findAll();
 		assertEquals(actual.size(), 0);
 	}
@@ -80,7 +82,7 @@ public class AircraftServiceImplTest {
 				aircraft(idNotExists));
 
 		when(repository.findAll()).thenReturn(expected);
-		final List<Aircraft> actual = service.find();
+		final List<Aircraft> actual = service.findAll();
 		verify(repository, times(1)).findAll();
 		assertEquals(expected, actual);
 	}

@@ -1,4 +1,4 @@
-package es.bahiasoftware.airport.business.service;
+package es.bahiasoftware.airport.business.service.aircraft;
 
 import es.bahiasoftware.airport.model.Aircraft;
 

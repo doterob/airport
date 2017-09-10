@@ -1,4 +1,4 @@
-package es.bahiasoftware.airport.business.service;
+package es.bahiasoftware.airport.business.service.aircraft;
 
 import java.util.List;
 
@@ -11,7 +11,7 @@ public interface AircraftService {
 	
 	Aircraft get(String id) throws AppException;
 	
-	List<Aircraft> find() throws AppException;
+	List<Aircraft> findAll() throws AppException;
 	
 	Aircraft discover(String manufacturer, String model) throws AppException;
 }

@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import es.bahiasoftware.airport.business.exception.AppException;
 import es.bahiasoftware.airport.business.manager.FleetManager;
-import es.bahiasoftware.airport.business.service.AircraftService;
+import es.bahiasoftware.airport.business.service.aircraft.AircraftService;
 import es.bahiasoftware.airport.model.Aircraft;
 
 @RestController
@@ -37,7 +37,7 @@ public class AircraftEndpoint {
 
 	@GetMapping("/all")
 	public List<Aircraft> all() throws AppException {
-		return service.find();
+		return service.findAll();
 	}
 
 	@GetMapping("/{id}")

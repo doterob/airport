@@ -1,31 +1,27 @@
 package es.bahiasoftware.airport.model;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+@Entity
 public class Airport {
 	
 	/** Radio de la tierra en KM */
     private static final double R = 6372.8;
 
-	private int id;
-	private String iata;
+    @Id
+	private String id;
 	private float latitude;
 	private float longitude;
 	private String city;
 	private String country;
 
-	public int getId() {
+	public String getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(String id) {
 		this.id = id;
-	}
-
-	public String getIata() {
-		return iata;
-	}
-
-	public void setIata(String iata) {
-		this.iata = iata;
 	}
 
 	public float getLatitude() {

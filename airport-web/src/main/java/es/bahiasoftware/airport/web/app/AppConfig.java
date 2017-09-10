@@ -26,7 +26,7 @@ import org.springframework.web.client.ResponseErrorHandler;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
-import es.bahiasoftware.airport.business.service.AircraftImporter;
+import es.bahiasoftware.airport.business.service.aircraft.AircraftImporter;
 import es.bahiasoftware.airport.model.Aircraft;
 
 @EnableWebMvc
